@@ -1,0 +1,85 @@
+05/08/2020 16:55:32	This log contains information about the import schema operation into project 'SWIMSDB' on computer 'LAPTOP-GCE1MH2A' by user 'weave'.
+05/08/2020 16:55:32	Import of database schema has started.
+05/08/2020 16:55:45	Gathering database credentials
+05/08/2020 16:55:45	Gathering database options
+05/08/2020 16:55:45	Gathering generic database scoped configuration option
+05/08/2020 16:55:45	Gathering users
+05/08/2020 16:55:45	Gathering roles
+05/08/2020 16:55:45	Gathering application roles
+05/08/2020 16:55:45	Gathering role memberships
+05/08/2020 16:55:45	Gathering filegroups
+05/08/2020 16:55:45	Gathering full-text catalogs
+05/08/2020 16:55:45	Gathering assemblies
+05/08/2020 16:55:45	Gathering certificates
+05/08/2020 16:55:45	Gathering asymmetric keys
+05/08/2020 16:55:45	Gathering symmetric keys
+05/08/2020 16:55:45	Gathering encrypted symmetric keys
+05/08/2020 16:55:45	Gathering schemas
+05/08/2020 16:55:45	Gathering XML schema collections
+05/08/2020 16:55:45	Gathering user-defined data types
+05/08/2020 16:55:45	Gathering user-defined types
+05/08/2020 16:55:45	Gathering table types
+05/08/2020 16:55:45	Gathering unique keys for table types
+05/08/2020 16:55:45	Gathering primary keys for table types
+05/08/2020 16:55:45	Gathering indexes for table types
+05/08/2020 16:55:45	Gathering check constraints for table types
+05/08/2020 16:55:45	Gathering default constraints for table types
+05/08/2020 16:55:45	Gathering partition functions
+05/08/2020 16:55:45	Gathering partition schemes
+05/08/2020 16:55:45	Gathering functions
+05/08/2020 16:55:45	Gathering encrypted functions
+05/08/2020 16:55:45	Gathering aggregates
+05/08/2020 16:55:45	Gathering procedures
+05/08/2020 16:55:45	Gathering encrypted procedures
+05/08/2020 16:55:46	Gathering tables
+05/08/2020 16:55:46	Gathering primary keys
+05/08/2020 16:55:46	Gathering unique constraints
+05/08/2020 16:55:46	Gathering foreign keys
+05/08/2020 16:55:46	Gathering default constraints
+05/08/2020 16:55:46	Gathering check constraints
+05/08/2020 16:55:46	Gathering views
+05/08/2020 16:55:46	Gathering encrypted views
+05/08/2020 16:55:46	Gathering indexes
+05/08/2020 16:55:46	Gathering statistics
+05/08/2020 16:55:46	Gathering full-text index stoplists
+05/08/2020 16:55:46	Gathering search property lists
+05/08/2020 16:55:46	Gathering search properties
+05/08/2020 16:55:46	Gathering full-text indexes
+05/08/2020 16:55:46	Gathering column store indexes
+05/08/2020 16:55:46	Gathering spatial indexes
+05/08/2020 16:55:46	Gathering XML indexes
+05/08/2020 16:55:46	Gathering Selective XML indexes
+05/08/2020 16:55:46	Gathering encrypted triggers
+05/08/2020 16:55:46	Gathering triggers
+05/08/2020 16:55:46	Gathering encrypted and clr ddl triggers
+05/08/2020 16:55:46	Gathering ddl triggers
+05/08/2020 16:55:46	Gathering synonyms
+05/08/2020 16:55:46	Gathering defaults
+05/08/2020 16:55:46	Gathering data constraint uddt bindings
+05/08/2020 16:55:46	Gathering rules
+05/08/2020 16:55:46	Gathering data constraint uddt bindings
+05/08/2020 16:55:46	Gathering message types
+05/08/2020 16:55:46	Gathering queues
+05/08/2020 16:55:46	Gathering contracts
+05/08/2020 16:55:46	Gathering services
+05/08/2020 16:55:46	Gathering event notifications
+05/08/2020 16:55:46	Gathering remote service bindings
+05/08/2020 16:55:46	Gathering broker priorities
+05/08/2020 16:55:46	Gathering signatures
+05/08/2020 16:55:46	Gathering data compression options
+05/08/2020 16:55:46	Gathering sequence types
+05/08/2020 16:55:46	Gathering security policies
+05/08/2020 16:55:46	Gather column encryption keys
+05/08/2020 16:55:46	Gathering column master keys
+05/08/2020 16:55:46	Gathering external data sources
+05/08/2020 16:55:46	Gathering external file formats
+05/08/2020 16:55:46	Gathering external tables
+05/08/2020 16:55:46	Gathering extended properties
+05/08/2020 16:55:46	Gathering credentials
+05/08/2020 16:55:46	Gathering logins
+05/08/2020 16:55:46	Gathering server audits
+05/08/2020 16:55:47	Scanning project for duplicate elements
+05/08/2020 16:55:47	Finished duplicate element processing
+05/08/2020 16:55:48	Finished importing database.
+05/08/2020 16:55:48	A summary of the import was saved to the following location: C:\Users\weave\GitHub\SWIMS\SWIMS\Import Schema Logs\SWIMSDB_20200805035532.log
+05/08/2020 16:55:48	Click Finish to continue...
