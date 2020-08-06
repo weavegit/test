@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SWIMS", "SWIMS\SWIMS.sqlproj", "{2604790F-2B80-43DD-80DE-8225E8BD2075}"
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SWIMSDB", "SWIMS\SWIMSDB.sqlproj", "{2604790F-2B80-43DD-80DE-8225E8BD2075}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWIMSWeb", "SWIMSWeb\SWIMSWeb.csproj", "{805EB271-936E-4C73-A012-3898CF54F4FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +19,10 @@ Global
 		{2604790F-2B80-43DD-80DE-8225E8BD2075}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2604790F-2B80-43DD-80DE-8225E8BD2075}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2604790F-2B80-43DD-80DE-8225E8BD2075}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{805EB271-936E-4C73-A012-3898CF54F4FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{805EB271-936E-4C73-A012-3898CF54F4FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{805EB271-936E-4C73-A012-3898CF54F4FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{805EB271-936E-4C73-A012-3898CF54F4FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
