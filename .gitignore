@@ -13,3 +13,6 @@ SWIMS/SWIMSDataAccessLayer/obj/*
 SWIMS/SWIMSDataAccessLayer/bin/*
 SWIMS/SWIMS_DB/obj/*
 SWIMS/SWIMS_DB/bin/*
+SWIMS/SWIMS_DB/Import Schema Logs/*
+
+SWIMS/.vs/SWIMS/DesignTimeBuild/.dtbcache.v2
