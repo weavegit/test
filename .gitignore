@@ -5,3 +5,11 @@ SWIMS/SWIMS/obj/Debug/SWIMSDB.sqlprojAssemblyReference.cache
 SWIMS/SWIMS/SWIMSDB.refactorlog
 SWIMS/SWIMS/obj/*
 SWIMS/SWIMS/bin/*
+*.pdb
+*.dll
+
+SWIMS/SWIMSSearchEngine/obj/*
+SWIMS/SWIMSDataAccessLayer/obj/*
+SWIMS/SWIMSDataAccessLayer/bin/*
+SWIMS/SWIMS_DB/obj/*
+SWIMS/SWIMS_DB/bin/*
