@@ -1,9 +1,0 @@
-C:\Users\weave\GitHub\SWIMS\SWIMS\bin\Debug\SWIMSDB.dacpac
-C:\Users\weave\GitHub\SWIMS\SWIMS\bin\Debug\SWIMS.dll
-C:\Users\weave\GitHub\SWIMS\SWIMS\bin\Debug\SWIMS.pdb
-C:\Users\weave\GitHub\SWIMS\SWIMS\obj\Debug\Model.xml
-C:\Users\weave\GitHub\SWIMS\SWIMS\obj\Debug\refactor.xml
-C:\Users\weave\GitHub\SWIMS\SWIMS\obj\Debug\postdeploy.sql
-C:\Users\weave\GitHub\SWIMS\SWIMS\obj\Debug\predeploy.sql
-C:\Users\weave\GitHub\SWIMS\SWIMS\obj\Debug\SWIMS.dll
-C:\Users\weave\GitHub\SWIMS\SWIMS\obj\Debug\SWIMS.pdb
