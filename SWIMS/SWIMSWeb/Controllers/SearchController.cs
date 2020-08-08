@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-
 using SWIMSDataAccessLayer.query;
 using SWIMSDataAccessLayer.dto;
 using log4net;
-using log4net.Config;
-using System.Configuration;
 using SWIMSWeb.models;
+
 namespace SWIMSWeb.Controllers
 {
     public class SearchController : Controller
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(SearchController));
-
      
         public ActionResult Index(FormCollection form)
         {
-
             string searchValue = Request.Form["searchString"];
+
+            if (string.IsNullOrWhiteSpace(searchValue))
+            {
+                return View();
+            }
+
             Dictionary<Guid, SearchModel> results = new Dictionary<Guid, SearchModel>();
 
             try

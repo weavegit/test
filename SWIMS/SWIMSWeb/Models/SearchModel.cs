@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using SWIMSDataAccessLayer.dto;
+
 namespace SWIMSWeb.models
 {
-    public class SearchModel
+    public class SearchModel 
     {
         public Guid jobId { get; set; }
         public string applicationId { get; set; }
@@ -18,7 +17,7 @@ namespace SWIMSWeb.models
         public string jobAddress { get; set; }
         public string districtAddress { get; set; }
         public string districtPostCode { get; set; }
-
+        
         public SearchModel()
         {
         }

@@ -1,5 +1,4 @@
-﻿using SWIMSDataAccessLayer.dto;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -27,7 +26,11 @@ namespace SWIMSDataAccessLayer.query
                                             " d.district_code, d.district_desc, j.masterjob_id, j.job_address, d.district_address, d.district_postcode " +
                                             " FROM[SWIMS_CUSTOMER].[dbo].[job] j " +
                                             " INNER JOIN[SWIMS_CUSTOMER].[dbo].[contract] c ON c.contract_id = j.contract_id " +
-                                            " INNER JOIN[SWIMS_CUSTOMER].[dbo].[district] d ON d.district_id = j.district_id";
+                                            " INNER JOIN[SWIMS_CUSTOMER].[dbo].[district] d ON d.district_id = j.district_id " +
+                                            " WHERE j.job_id = '%@param1%' " +
+                                            " OR d.district_address LIKE '%@param2%'" +
+                                            " OR c.contract_code LIKE '%@param3%'" +
+                                            " OR d.district_code LIKE '%@param4%'";
         public IEnumerable<dto.ResultsDTO> List(string searchValue)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["connection"].ConnectionString;
@@ -35,10 +38,13 @@ namespace SWIMSDataAccessLayer.query
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
+                string query = SEARCH_QUERY;
                 SqlCommand cmd = new SqlCommand(SEARCH_QUERY, con);
                 cmd.CommandType = CommandType.Text;
-              //cmd.Parameters.AddWithValue("param1", Server.UrlDecode(str.ToString()));
-
+                cmd.Parameters.AddWithValue("@param1", searchValue);
+                cmd.Parameters.AddWithValue("@param2", searchValue);
+                cmd.Parameters.AddWithValue("@param3", searchValue);
+                cmd.Parameters.AddWithValue("@param4", searchValue);
                 con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
 
