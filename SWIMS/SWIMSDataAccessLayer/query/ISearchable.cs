@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace SWIMSSearchEngine
+namespace SWIMSDataAccessLayer.query
 {
     public interface ISearchable
     {
-        void Search();
+        IEnumerable<dto.ResultsDTO> List(string searchValue);
     }
 }

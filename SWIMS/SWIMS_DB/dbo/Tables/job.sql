@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[job] (
-    [job_id]         INT            NOT NULL,
+    [job_id]         UNIQUEIDENTIFIER            NOT NULL,
     [application_id] NVARCHAR (50)  NULL,
     [contract_id]    INT            NOT NULL,
     [district_id]    INT            NOT NULL,

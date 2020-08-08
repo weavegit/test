@@ -1,0 +1,70 @@
+﻿@model IEnumerable<SWIMSWeb.models.SearchModel>
+
+@{
+    ViewBag.Title = "Job Search";
+}
+
+<div class="">
+    <b>Results</b>
+
+    <table class="table table-bordered table-responsive table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Job Identifier</th>
+                <th scope="col">Contract Code</th>
+                <th scope="col">Contract Desc </th>
+                <th scope="col">District Code </th>
+                <th scope="col">District Desc</th>
+                <th scope="col">Job Address</th>
+                <th scope="col">District Address</th>
+                <th scope="col">District PostCode</th>
+            </tr>
+        </thead>
+
+        @if (Model != null)
+        {
+            foreach (var result in Model)
+            {
+                <tr>
+                    <td>@result.jobId</td>
+                    <td>@result.contractCode</td>
+                    <td>@result.contractDesc</td>
+                    <td>@result.districtCode</td>
+                    <td>@result.districtDesc</td>
+                    <td>@result.jobAddress</td>
+                    <td>@result.districtAddress</td>
+                    <td>@result.districtPostCode</td>
+
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+
+@using (Html.BeginForm("index", "Search", FormMethod.Post, new { id = "goSearch" }))
+{
+
+    <b>Please enter you search text...</b>
+
+    <div class="row">
+
+        <div class="col-md-8">
+            <input id="searchString" name="searchString" type="text" class="input-group-text" />
+        </div>
+
+        <div class="col-md-4">
+            <div class="" style="float:left;">
+                <button type="button" class="btn btn-outline-success" onclick="document.getElementById('goSearch').submit()">Go!</button>
+            </div>
+            <div class="" style="float:left;margin-left:10px;">
+                <button type="button" class="btn btn-outline-danger">Clear</button>
+            </div>
+        </div>
+
+    </div>
+
+}
+
+
+
