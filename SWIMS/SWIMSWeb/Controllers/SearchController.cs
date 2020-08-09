@@ -55,8 +55,8 @@ namespace SWIMSWeb.Controllers
 
         public ActionResult Clear()
         {
-            ViewBag.Message = "Please enter your search";
-            return View(new ResultsModel());
+            ViewBag.UserMessage = "Please enter your search";
+            return View("index");
         }
     }
 }
