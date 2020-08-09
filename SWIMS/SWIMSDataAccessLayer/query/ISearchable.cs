@@ -6,6 +6,6 @@ namespace SWIMSDataAccessLayer.query
 {
     public interface ISearchable
     {
-        IEnumerable<dto.ResultsDTO> List(string searchValue);
+        IEnumerable<dto.ResultsDTO> List(dto.SearchDTO dto);
     }
 }

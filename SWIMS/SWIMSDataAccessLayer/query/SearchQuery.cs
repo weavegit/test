@@ -26,25 +26,31 @@ namespace SWIMSDataAccessLayer.query
                                             " d.district_code, d.district_desc, j.masterjob_id, j.job_address, d.district_address, d.district_postcode " +
                                             " FROM[SWIMS_CUSTOMER].[dbo].[job] j " +
                                             " INNER JOIN[SWIMS_CUSTOMER].[dbo].[contract] c ON c.contract_id = j.contract_id " +
-                                            " INNER JOIN[SWIMS_CUSTOMER].[dbo].[district] d ON d.district_id = j.district_id " +
-                                            " WHERE j.job_id = '%@param1%' " +
-                                            " OR d.district_address LIKE '%@param2%'" +
-                                            " OR c.contract_code LIKE '%@param3%'" +
-                                            " OR d.district_code LIKE '%@param4%'";
-        public IEnumerable<dto.ResultsDTO> List(string searchValue)
+                                            " INNER JOIN[SWIMS_CUSTOMER].[dbo].[district] d ON d.district_id = j.district_id " ;
+                                            
+        public IEnumerable<dto.ResultsDTO> List(dto.SearchDTO dto)
         {
+            string query = SEARCH_QUERY;
             string connectionString = ConfigurationManager.ConnectionStrings["connection"].ConnectionString;
             List<dto.ResultsDTO> resultsCol = new List<dto.ResultsDTO>();
+            Guid validGuid;
+            bool isFormatValid = Guid.TryParse(dto.SearchValue, out validGuid);
+
+            if (dto.JobIdIsRequired && !isFormatValid)
+            {
+                return resultsCol;
+            }
+
+            query = CompleteQueryString(query, dto, isFormatValid);
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                string query = SEARCH_QUERY;
-                SqlCommand cmd = new SqlCommand(SEARCH_QUERY, con);
+
+                SqlCommand cmd = new SqlCommand(query, con);
                 cmd.CommandType = CommandType.Text;
-                cmd.Parameters.AddWithValue("@param1", searchValue);
-                cmd.Parameters.AddWithValue("@param2", searchValue);
-                cmd.Parameters.AddWithValue("@param3", searchValue);
-                cmd.Parameters.AddWithValue("@param4", searchValue);
+
+                LoadParameters(cmd, dto, isFormatValid);
+
                 con.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -81,5 +87,51 @@ namespace SWIMSDataAccessLayer.query
             return resultsCol;
         }
 
+        private void LoadParameters(SqlCommand cmd, dto.SearchDTO dto, bool isFormatValid)
+        {
+            if (isFormatValid && dto.JobIdIsRequired)
+            {
+                cmd.Parameters.AddWithValue("@job_id", dto.SearchValue);
+            }
+            if (dto.AddressIsRequired)
+            {
+                cmd.Parameters.AddWithValue("@district_address", "%" + dto.SearchValue + "%");
+            }
+            if (dto.ContractIsRequired)
+            {
+                cmd.Parameters.AddWithValue("@contract_code", "%" + dto.SearchValue + "%");
+            }
+            if (dto.DistrictIsRequired)
+            {
+                cmd.Parameters.AddWithValue("@district_code", "%" + dto.SearchValue + "%");
+            }
+        }
+
+        private string CompleteQueryString(String querySoFar, dto.SearchDTO dto, bool isFormatValid)
+        {
+            string clausePrefix = " WHERE ";
+
+            if (isFormatValid && dto.JobIdIsRequired)
+            {
+                querySoFar += clausePrefix + " j.job_id = @job_id ";
+                clausePrefix = " OR ";
+            }
+            if (dto.AddressIsRequired)
+            {
+                querySoFar += clausePrefix + " d.district_address LIKE @district_address OR j.job_address LIKE @district_address ";
+                clausePrefix = " OR ";
+            }
+            if (dto.ContractIsRequired)
+            {
+                querySoFar += clausePrefix + " c.contract_code LIKE @contract_code OR c.contract_desc LIKE @contract_code";
+                clausePrefix = " OR ";
+            }
+            if (dto.DistrictIsRequired)
+            {
+                querySoFar += clausePrefix + " d.district_code LIKE @district_code OR d.district_desc LIKE @district_code ";
+            }
+
+            return querySoFar;
+        }
     }
 }

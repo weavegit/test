@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SWIMSDataAccessLayer.dto
 {
-    public class ResultsDTO
+    public class ResultsDTO : ISortable
     {
         public Guid jobId { get; set; }
         public string applicationId { get; set; }
@@ -39,6 +39,11 @@ namespace SWIMSDataAccessLayer.dto
             this.jobAddress = jobAddress;
             this.districtAddress = districtAddress;
             this.districtPostCode = districtPostCode;
+        }
+
+        public object Identifier()
+        {
+            return jobId;
         }
     }
 }

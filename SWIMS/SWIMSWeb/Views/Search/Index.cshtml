@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SWIMSWeb.models.SearchModel>
+﻿@model SWIMSWeb.models.ResultsModel
 
 @{
     ViewBag.Title = "Job Search";
@@ -21,9 +21,9 @@
             </tr>
         </thead>
 
-        @if (Model != null)
+        @if (Model != null && Model.Results != null)
         {
-            foreach (var result in Model)
+            foreach (var result in Model.Results)
             {
                 <tr>
                     <td>@result.jobId</td>
@@ -34,7 +34,6 @@
                     <td>@result.jobAddress</td>
                     <td>@result.districtAddress</td>
                     <td>@result.districtPostCode</td>
-
                 </tr>
             }
         }
@@ -49,8 +48,15 @@
 
     <div class="row">
 
-        <div class="col-md-8">
-            <input id="searchString" name="searchString" type="text" class="input-group-text" />
+        <div class="col-md-4">
+            @Html.TextBoxFor(m => m.SearchTerm, new { @class = "input-group-text" })
+        </div>
+
+        <div class="col-md-4">
+            @Html.CheckBoxFor(m => m.JobIdIsChecked, true) Jobs
+            @Html.CheckBoxFor(m => m.AddressIsChecked, true) Address
+            @Html.CheckBoxFor(m => m.ContractIsChecked, true) Contract
+            @Html.CheckBoxFor(m => m.DistrictIsChecked, true) District
         </div>
 
         <div class="col-md-4">
@@ -58,12 +64,13 @@
                 <button type="button" class="btn btn-outline-success" onclick="document.getElementById('goSearch').submit()">Go!</button>
             </div>
             <div class="" style="float:left;margin-left:10px;">
-                <button type="button" class="btn btn-outline-danger">Clear</button>
+                <button type="button" class="btn btn-outline-danger" onclick="">Clear</button>
             </div>
         </div>
 
     </div>
-
+    <br />
+    @ViewBag.UserMessage
 }
 
 

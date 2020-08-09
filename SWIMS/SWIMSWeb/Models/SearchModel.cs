@@ -7,13 +7,10 @@ namespace SWIMSWeb.models
     {
         public Guid jobId { get; set; }
         public string applicationId { get; set; }
-        //public int contractId { get; set; }
         public string contractCode { get; set; }
         public string contractDesc { get; set; }
-        //public int districtId { get; set; }
         public string districtCode { get; set; }
         public string districtDesc { get; set; }
-        //public int masterjobId { get; set; }
         public string jobAddress { get; set; }
         public string districtAddress { get; set; }
         public string districtPostCode { get; set; }
@@ -26,13 +23,10 @@ namespace SWIMSWeb.models
         {
             this.jobId = dto.jobId;
             this.applicationId = dto.applicationId;
-            //this.contractId = dto.contractId;
             this.contractCode = dto.contractCode;
             this.contractDesc = dto.contractDesc;
-            //this.districtId = dto.districtId;
             this.districtCode = dto.districtCode;
             this.districtDesc = dto.districtDesc;
-            //this.masterjobId = masterjobId;
             this.jobAddress = dto.jobAddress;
             this.districtAddress = dto.districtAddress;
             this.districtPostCode = dto.districtPostCode;

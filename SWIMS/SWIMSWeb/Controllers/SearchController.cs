@@ -13,49 +13,50 @@ namespace SWIMSWeb.Controllers
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(SearchController));
      
-        public ActionResult Index(FormCollection form)
+        public ActionResult Index(ResultsModel model)
         {
-            string searchValue = Request.Form["searchString"];
+            Guid validGuid;
+            bool isFormatValid = Guid.TryParse(model.SearchTerm, out validGuid);
 
-            if (string.IsNullOrWhiteSpace(searchValue))
+            if (string.IsNullOrWhiteSpace(model.SearchTerm) || model.AllOffChecksOff() ) {
+                ViewBag.UserMessage = "Please enter your search";
+            } 
+            else if ((model.JobIdIsChecked && !isFormatValid)) {
+                ViewBag.UserMessage = "Please enter a valid GUID";
+            } 
+            else
             {
-                return View();
-            }
+                Dictionary<Object, SearchModel> results = new Dictionary<Object, SearchModel>();
 
-            Dictionary<Guid, SearchModel> results = new Dictionary<Guid, SearchModel>();
-
-            try
-            {
-                ISearchable seachQuery = new SearchQuery();
-                IEnumerable<ResultsDTO> collection = seachQuery.List(searchValue);
-
-                foreach(ResultsDTO dto in collection)
+                try
                 {
-                    if (!results.ContainsKey(dto.jobId))
+                    ISearchable seachQuery = new SearchQuery();
+                
+                    IEnumerable<ResultsDTO> collection = seachQuery.List(new SearchDTO(model.SearchTerm.Trim(), model.JobIdIsChecked, model.AddressIsChecked, model.ContractIsChecked, model.DistrictIsChecked));
+
+                    foreach(ResultsDTO dto in collection)
                     {
-                        results.Add(dto.jobId, new SearchModel(dto));
+                        if (!results.ContainsKey(dto.Identifier()))
+                        {
+                            results.Add(dto.jobId, new SearchModel(dto));
+                        }
                     }
                 }
-            }
-            catch(Exception e)
-            {
-                log.Error(e);
-            }
-            return View(results.Values.ToList());
-        }
+                catch(Exception e)
+                {
+                    log.Error(e);
+                }
 
-        public ActionResult Search()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+                model.Results = results.Values.ToList();
+                ViewBag.UserMessage = "Your search gave " + model.Results.Count + " results.";
+            }
+            return View(model);
         }
 
         public ActionResult Clear()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            ViewBag.Message = "Please enter your search";
+            return View(new ResultsModel());
         }
     }
 }
