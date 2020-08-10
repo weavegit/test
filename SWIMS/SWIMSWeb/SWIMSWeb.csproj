@@ -315,10 +315,6 @@
       <Project>{96873bf8-bce2-475f-b88a-cbafcdda27af}</Project>
       <Name>SWIMSDataAccessLayer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SWIMSSearchEngine\SWIMSSearchEngine.csproj">
-      <Project>{beb474b9-99ad-445f-a647-a4f59a43395d}</Project>
-      <Name>SWIMSSearchEngine</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
