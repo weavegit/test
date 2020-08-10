@@ -4,62 +4,71 @@
     ViewBag.Title = "Job Search";
 }
 
-    <div class="">
+<div class="">
 
 
-        @if (Model != null && Model.Results != null && Model.Results.Count > 0)
-        {
-            <b>Results</b>
-            <table class="table table-bordered table-responsive table-hover table-striped table-bordered table-sm">
-                <thead>
-                    <tr>
-                        <th scope="col">Job Id</th>
-                        <th scope="col">
-                            Contract Code
-                            @Html.ActionLink("Contract Code", "Sort", new { sortOrder = ViewBag.NameSortParm })
-                        </th>
-                        <th scope="col">Contract Desc. </th>
-                        <th scope="col">District Code </th>
-                        <th scope="col">District Desc.</th>
-                        <th scope="col">Job Address</th>
-                        <th scope="col">District Address</th>
-                        <th scope="col">District PostCode</th>
-                    </tr>
-                </thead>
+    @if (Model != null && Model.Results != null && Model.Results.Count > 0)
+    {
+        <div style="color:#313638;">Your Search Results</div><br />
+        <table id="resultTable" class="table table-bordered table-responsive table-striped table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Job Id</th>
+                    <th scope="col" class="th-sm">
+                        @Html.ActionLink("Contract Code", "Sort", null, new { @id = "contractCode", @class = "selectable" })
+                    </th>
+                    <th scope="col">
+                        @Html.ActionLink("Contract Desc.", "Sort", null, new { @id = "contractDesc", @class = "selectable" })
+                    </th>
+                    <th scope="col">
+                        @Html.ActionLink("District Code", "Sort", null, new { @id = "districtCode", @class = "selectable" })
+                    </th>
+                    <th scope="col">
+                        @Html.ActionLink("District Desc.", "Sort", null, new { @id = "districtDesc", @class = "selectable" })
+                    </th>
+                    <th scope="col">
+                        @Html.ActionLink("Job Address", "Sort", null, new { @id = "jobAddress", @class = "selectable" })
+                    </th>
+                    <th scope="col">
+                        @Html.ActionLink("District Address", "Sort", null, new { @id = "districtAddress", @class = "selectable" })
+                    </th>
+                    <th scope="col">
+                        @Html.ActionLink("District PostCode", "Sort", null, new { @id = "districtPostCode", @class = "selectable" })
+                    </th>
+                </tr>
+            </thead>
 
-                @foreach (var result in Model.Results)
-                {
-                    <tr>
-                        <td>@result.jobId</td>
-                        <td>@result.contractCode</td>
-                        <td>@result.contractDesc</td>
-                        <td>@result.districtCode</td>
-                        <td>@result.districtDesc</td>
-                        <td>@result.jobAddress</td>
-                        <td>@result.districtAddress</td>
-                        <td>@result.districtPostCode</td>
-                    </tr>
-                }
+            @foreach (var result in Model.Results)
+            {
+                <tr>
+                    <td>@result.jobId</td>
+                    <td>@result.contractCode</td>
+                    <td>@result.contractDesc</td>
+                    <td>@result.districtCode</td>
+                    <td>@result.districtDesc</td>
+                    <td>@result.jobAddress</td>
+                    <td>@result.districtAddress</td>
+                    <td>@result.districtPostCode</td>
+                </tr>
+            }
 
-            </table>
+        </table>
+    }
 
-        }
+</div>
 
-    </div>
-@ViewBag.UserMessage
-
-@using (Html.BeginForm("index", "Search", FormMethod.Post, new { id = "goSearch" }))
+<div style="color:#1072ba">@ViewBag.UserMessage</div>
+<br />
+@using (Html.BeginForm("Index", "Search", FormMethod.Post, new { id = "goSearch" }))
 {
 
-    <b>Please enter you search text...</b>
-
-    <div class="row">
+     <div class="row rowDecor">
 
         <div class="col-md-4">
-            @Html.TextBoxFor(m => m.SearchTerm, new { @class = "input-group-text" })
+            @Html.TextBoxFor(m => m.SearchTerm, new { @class = "input-group-text textWidth" })
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4" style="margin-top:10px;">
             @Html.CheckBoxFor(m => m.JobIdIsChecked) Jobs
             @Html.CheckBoxFor(m => m.AddressIsChecked) Address
             @Html.CheckBoxFor(m => m.ContractIsChecked) Contract
@@ -67,18 +76,80 @@
         </div>
 
         <div class="col-md-4">
-            <div class="" style="float:left;">
+            <div class="" style="float:right;margin-left:10px;">
+                <button type="button" class="btn btn-outline-danger" onclick="location.href='@Url.Action("Index", "Search")'">Clear</button>
+            </div>
+            <div class="" style="float:right;">
                 <button type="button" class="btn btn-outline-success" onclick="document.getElementById('goSearch').submit()">Go!</button>
             </div>
-            <div class="" style="float:left;margin-left:10px;">
-                <button type="button" class="btn btn-outline-danger" onclick="location.href='@Url.Action("Clear", "Search")'">Clear</button>
-            </div>
+
         </div>
 
     </div>
+
     <br />
 
+    <input type="hidden" name="SortColumn" value="@Html.AttributeEncode(Model.SortColumn)" id="SortColumn" />
+    <input type="hidden" name="Ascending" value="@Html.AttributeEncode(Model.Ascending)" id="Ascending" />
 }
 
 
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
+<script type="text/javascript">
+    $(function () {
+        $("#contractCode").click(function () {
+            $("#SortColumn").val("contractCode");
+            document.forms[0].submit();
+            return false;
+        });
+        $("#districtCode").click(function () {
+            $("#SortColumn").val("districtCode");
+            document.forms[0].submit();
+            return false;
+        });
+
+        $("#contractDesc").click(function () {
+            $("#SortColumn").val("contractDesc");
+            document.forms[0].submit();
+            return false;
+        });
+        $("#districtDesc").click(function () {
+            $("#SortColumn").val("districtDesc");
+            document.forms[0].submit();
+            return false;
+        });
+
+        $("#jobAddress").click(function () {
+            $("#SortColumn").val("jobAddress");
+            document.forms[0].submit();
+            return false;
+        });
+        $("#districtAddress").click(function () {
+            $("#SortColumn").val("districtAddress");
+            document.forms[0].submit();
+            return false;
+        });
+        $("#districtPostCode").click(function () {
+            $("#SortColumn").val("districtPostCode");
+            document.forms[0].submit();
+            return false;
+        });
+    });
+</script>
+
+<style>
+
+    a.selectable {
+        color: #1072ba;
+    }
+
+    .rowDecor {
+        border: #1072ba 2px outset;
+        padding: 10px;
+    }
+    .textWidth {
+        width: 100%;
+        text-align: left;
+    }
+</style>

@@ -12,9 +12,10 @@ namespace SWIMSWeb.Controllers
     public class SearchController : Controller
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(SearchController));
-     
+
         public ActionResult Index(ResultsModel model)
         {
+            var re = Request;
             Guid validGuid;
             bool isFormatValid = Guid.TryParse(model.SearchTerm, out validGuid);
             ISearchable seachQuery = new SearchQuery();
@@ -43,17 +44,35 @@ namespace SWIMSWeb.Controllers
                     log.Error(e);
                 }
 
-                model.Results = results;
+                if(model.SortColumn !=null)
+                {
+                    model.Results = OrderResults(results, model);
+                } 
+                else
+                {
+                    model.Results = results;
+                }
+              
                 ViewBag.UserMessage = "Your search gave " + model.Results.Count + " results.";
             }
             return View(model);
         }
 
-        public ActionResult Clear()
+        private List<SearchModel> OrderResults(List<SearchModel> results, ResultsModel model)
         {
-            ViewBag.UserMessage = "Please enter your search";
-            return View("index");
-        }
+            model.Ascending = !model.Ascending;
+            var propertyInfo = typeof(SearchModel).GetProperty(model.SortColumn);
+            if (model.Ascending)
+            {
+                results = results.OrderBy(x => propertyInfo.GetValue(x, null)).ToList();
+            } 
+            else
+            {
 
+                results = results.OrderByDescending(x => propertyInfo.GetValue(x, null)).ToList();
+            }
+ 
+            return results;
+        }
     }
 }

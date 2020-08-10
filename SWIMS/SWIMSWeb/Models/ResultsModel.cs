@@ -7,8 +7,10 @@ namespace SWIMSWeb.models
     public class ResultsModel 
     {
         public List<SearchModel> Results { get; set; }
-        [Display(Name = "Search Term")]
+
         public string SearchTerm { get; set; }
+        public string SortColumn { get; set; }
+        public bool Ascending { get; set; }
         public bool JobIdIsChecked { get; set; }
         public bool AddressIsChecked { get; set; }
         public bool ContractIsChecked { get; set; }
