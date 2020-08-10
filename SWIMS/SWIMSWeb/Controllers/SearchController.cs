@@ -17,29 +17,25 @@ namespace SWIMSWeb.Controllers
         {
             Guid validGuid;
             bool isFormatValid = Guid.TryParse(model.SearchTerm, out validGuid);
+            ISearchable seachQuery = new SearchQuery();
+            IEnumerable<ResultsDTO> collection = null;
+            List<SearchModel> results = results = new List<SearchModel>();
 
-            if (string.IsNullOrWhiteSpace(model.SearchTerm) || model.AllOffChecksOff() ) {
+            if (string.IsNullOrWhiteSpace(model.SearchTerm) || model.IsChecksOff() ) {
+                model.AllChecksOn();
                 ViewBag.UserMessage = "Please enter your search";
             } 
-            else if ((model.JobIdIsChecked && !isFormatValid)) {
+            else if ((model.IsJobOnlySearch() && !isFormatValid)) {
                 ViewBag.UserMessage = "Please enter a valid GUID";
             } 
             else
             {
-                Dictionary<Object, SearchModel> results = new Dictionary<Object, SearchModel>();
-
                 try
                 {
-                    ISearchable seachQuery = new SearchQuery();
-                
-                    IEnumerable<ResultsDTO> collection = seachQuery.List(new SearchDTO(model.SearchTerm.Trim(), model.JobIdIsChecked, model.AddressIsChecked, model.ContractIsChecked, model.DistrictIsChecked));
-
+                    collection = seachQuery.List(new SearchDTO(model.SearchTerm.Trim(), model.JobIdIsChecked, model.AddressIsChecked, model.ContractIsChecked, model.DistrictIsChecked));
                     foreach(ResultsDTO dto in collection)
                     {
-                        if (!results.ContainsKey(dto.Identifier()))
-                        {
-                            results.Add(dto.jobId, new SearchModel(dto));
-                        }
+                        results.Add(new SearchModel(dto));
                     }
                 }
                 catch(Exception e)
@@ -47,7 +43,7 @@ namespace SWIMSWeb.Controllers
                     log.Error(e);
                 }
 
-                model.Results = results.Values.ToList();
+                model.Results = results;
                 ViewBag.UserMessage = "Your search gave " + model.Results.Count + " results.";
             }
             return View(model);
@@ -58,5 +54,6 @@ namespace SWIMSWeb.Controllers
             ViewBag.UserMessage = "Please enter your search";
             return View("index");
         }
+
     }
 }

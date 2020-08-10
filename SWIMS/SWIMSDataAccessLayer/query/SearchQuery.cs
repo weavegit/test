@@ -21,7 +21,7 @@ namespace SWIMSDataAccessLayer.query
         private const int DISTRICTADDRESS = 10;
         private const int DISTRICTPOSTCODE = 11;
 
-        private const string SEARCH_QUERY = "SELECT j.job_id, j.application_id, j.contract_id, " + "" +
+        private const string SEARCH_QUERY = "SELECT distinct(j.job_id), j.application_id, j.contract_id, " + "" +
                                             " c.contract_code, c.contract_desc, j.district_id, " +
                                             " d.district_code, d.district_desc, j.masterjob_id, j.job_address, d.district_address, d.district_postcode " +
                                             " FROM[SWIMS_CUSTOMER].[dbo].[job] j " +
@@ -36,7 +36,7 @@ namespace SWIMSDataAccessLayer.query
             Guid validGuid;
             bool isFormatValid = Guid.TryParse(dto.SearchValue, out validGuid);
 
-            if (dto.JobIdIsRequired && !isFormatValid)
+            if (dto.IsJobOnlySearch() && !isFormatValid)
             {
                 return resultsCol;
             }

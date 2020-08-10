@@ -3,7 +3,7 @@ using SWIMSDataAccessLayer.dto;
 
 namespace SWIMSWeb.models
 {
-    public class SearchModel 
+    public class SearchModel
     {
         public Guid jobId { get; set; }
         public string applicationId { get; set; }
@@ -35,26 +35,20 @@ namespace SWIMSWeb.models
         public SearchModel(
             Guid jobId, 
             string applicationId, 
-            //int contractId, 
             string contractCode, 
             string contract_desc, 
-            //int districtId, 
             string districtCode, 
             string district_desc,
-            //int masterjobId, 
             string jobAddress, 
             string districtAddress, 
             string districtPostCode)
         {
             this.jobId = jobId;
             this.applicationId = applicationId;
-            //this.contractId = contractId;
             this.contractCode = contractCode;
             this.contractDesc = contract_desc;
-            //this.districtId = districtId;
             this.districtCode = districtCode;
             this.districtDesc = district_desc;
-            //this.masterjobId = masterjobId;
             this.jobAddress = jobAddress;
             this.districtAddress = districtAddress;
             this.districtPostCode = districtPostCode;

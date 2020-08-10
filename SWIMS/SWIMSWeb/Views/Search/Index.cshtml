@@ -4,42 +4,49 @@
     ViewBag.Title = "Job Search";
 }
 
-<div class="">
-    <b>Results</b>
+    <div class="">
 
-    <table class="table table-bordered table-responsive table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Job Identifier</th>
-                <th scope="col">Contract Code</th>
-                <th scope="col">Contract Desc </th>
-                <th scope="col">District Code </th>
-                <th scope="col">District Desc</th>
-                <th scope="col">Job Address</th>
-                <th scope="col">District Address</th>
-                <th scope="col">District PostCode</th>
-            </tr>
-        </thead>
 
-        @if (Model != null && Model.Results != null)
+        @if (Model != null && Model.Results != null && Model.Results.Count > 0)
         {
-            foreach (var result in Model.Results)
-            {
-                <tr>
-                    <td>@result.jobId</td>
-                    <td>@result.contractCode</td>
-                    <td>@result.contractDesc</td>
-                    <td>@result.districtCode</td>
-                    <td>@result.districtDesc</td>
-                    <td>@result.jobAddress</td>
-                    <td>@result.districtAddress</td>
-                    <td>@result.districtPostCode</td>
-                </tr>
-            }
-        }
-    </table>
-</div>
+            <b>Results</b>
+            <table class="table table-bordered table-responsive table-hover table-striped table-bordered table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">Job Id</th>
+                        <th scope="col">
+                            Contract Code
+                            @Html.ActionLink("Contract Code", "Sort", new { sortOrder = ViewBag.NameSortParm })
+                        </th>
+                        <th scope="col">Contract Desc. </th>
+                        <th scope="col">District Code </th>
+                        <th scope="col">District Desc.</th>
+                        <th scope="col">Job Address</th>
+                        <th scope="col">District Address</th>
+                        <th scope="col">District PostCode</th>
+                    </tr>
+                </thead>
 
+                @foreach (var result in Model.Results)
+                {
+                    <tr>
+                        <td>@result.jobId</td>
+                        <td>@result.contractCode</td>
+                        <td>@result.contractDesc</td>
+                        <td>@result.districtCode</td>
+                        <td>@result.districtDesc</td>
+                        <td>@result.jobAddress</td>
+                        <td>@result.districtAddress</td>
+                        <td>@result.districtPostCode</td>
+                    </tr>
+                }
+
+            </table>
+
+        }
+
+    </div>
+@ViewBag.UserMessage
 
 @using (Html.BeginForm("index", "Search", FormMethod.Post, new { id = "goSearch" }))
 {
@@ -53,10 +60,10 @@
         </div>
 
         <div class="col-md-4">
-            @Html.CheckBoxFor(m => m.JobIdIsChecked, true) Jobs
-            @Html.CheckBoxFor(m => m.AddressIsChecked, true) Address
-            @Html.CheckBoxFor(m => m.ContractIsChecked, true) Contract
-            @Html.CheckBoxFor(m => m.DistrictIsChecked, true) District
+            @Html.CheckBoxFor(m => m.JobIdIsChecked) Jobs
+            @Html.CheckBoxFor(m => m.AddressIsChecked) Address
+            @Html.CheckBoxFor(m => m.ContractIsChecked) Contract
+            @Html.CheckBoxFor(m => m.DistrictIsChecked) District
         </div>
 
         <div class="col-md-4">
@@ -70,7 +77,7 @@
 
     </div>
     <br />
-    @ViewBag.UserMessage
+
 }
 
 

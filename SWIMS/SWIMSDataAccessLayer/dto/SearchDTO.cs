@@ -12,6 +12,11 @@ namespace SWIMSDataAccessLayer.dto
         public bool ContractIsRequired { get; set; }
         public bool DistrictIsRequired { get; set; }
 
+        public bool IsJobOnlySearch()
+        {
+            return JobIdIsRequired && !AddressIsRequired && !ContractIsRequired && !DistrictIsRequired;
+        }
+
         public SearchDTO(string searchValue, bool jobIdIsRequired, bool addressIsRequired, bool contractIsRequired, bool districtIsRequired)
         {
             SearchValue = searchValue;
