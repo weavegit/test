@@ -18,3 +18,5 @@ SWIMS/SWIMS_DB/Import Schema Logs/*
 SWIMS/.vs/SWIMS/DesignTimeBuild/.dtbcache.v2
 SWIMS/SWIMSSearchEngine/bin/*
 SWIMS/.vs/SWIMS/v16/.suo
+SWIMS/SWIMS_DB/SWIMS_DB.dbmdl
+SWIMS/SWIMS_DB/SWIMS_DB.jfm
